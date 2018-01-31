@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 #最后，:defaults => { :format => :json } 意思是默认客户端要求的是 JSON 格式，本来的默认值是 HTML。如果没有改这个的话，你必须在网址最后面加上 .json 来指定客户端要求的格式，例如 GET /api/v1/trains.json。
  namespace :api, :defaults => { :format => :json } do
    namespace :v1 do
+    get "/me" => "users#show", :as => :user
+    patch "/me" => "users#update", :as => :update_user
     post "/signup" => "auth#signup"
     post "/login" => "auth#login"
     post "/logout" => "auth#logout"
