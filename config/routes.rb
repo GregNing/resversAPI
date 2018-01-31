@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
  
 #其中两层的namespace 会让网址前增加/api/v1/、Controller 的目录多两层放在app/controllers/api/v1/ 下、Controller 类的名字前面增加Api::V1，变成Api::V1::ReservationsController、路由方法变成api_v1_XXXXX_path 和api_v1_XXXXX_url
@@ -19,5 +20,12 @@ Rails.application.routes.draw do
      delete "/reservations/:booking_code" => "reservations#destroy", :as => :cancel_reservation
    end
  end
-
+ #以下寫法也可以但這是看得懂 ruby 所使用的 但因這是寫 API所以要讓其他人看懂的話要寫上面方式
+# namespace :api, :defaults => { :format => :json } do
+#   namespace :v1 do
+#     resources :trains, :only => [:index, :show]
+#     resources :reservations, :only => [:show, :create, :update, :destroy]        
+#   end
+# end
+ root "welcome#index"
 end
